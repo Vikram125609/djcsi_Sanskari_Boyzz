@@ -39,7 +39,7 @@ const SignUp = () => {
 
     return (
         <div className='signup_body'>
-            <div className="container" id="container">
+            <div className="singup_container" id="container">
                 <div className="form-container sign-up-container">
                     <form action="#">
                         <h1 className="signup_heading">Create Account</h1>
@@ -48,15 +48,15 @@ const SignUp = () => {
                             <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
                             <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
                         </div>
-                        <span>or use your email for registration</span>
-                        <input type="text" placeholder="Name" value={signUpName} onChange={(e)=>setSignUpName(e.target.value)}/>
-                        <input type="email" placeholder="Email" value={signUpEmail} onChange={(e)=>setSignUpEmail(e.target.value)}/>
-                        <input type="password" placeholder="Password"  value={signUpPassword} onChange={(e)=>setSignUpPassword(e.target.value)}/>
+                        <span className='signup_span'>or use your email for registration</span>
+                        <input className='signup_input' type="text" placeholder="Name" value={signUpName} onChange={(e)=>setSignUpName(e.target.value)}/>
+                        <input className='signup_input' type="email" placeholder="Email" value={signUpEmail} onChange={(e)=>setSignUpEmail(e.target.value)}/>
+                        <input className='signup_input' type="password" placeholder="Password"  value={signUpPassword} onChange={(e)=>setSignUpPassword(e.target.value)}/>
                         <button>Sign Up</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
-                    <form action="#">
+                    <form className='signup_form' action="#">
                         <h1 className='signup_heading'>Sign in</h1>
                         <div className="social-container">
                             <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
@@ -64,10 +64,10 @@ const SignUp = () => {
                             <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
                         </div>
                         <span>or use your account</span>
-                        <input type="email" placeholder="Email" value={signInEmail} onChange={(e)=>{setSignInEmail(e.target.value)}} />
-                        <input type="password" placeholder="Password" value={signInPassword} onChange={(e)=>{setSignInPassword(e.target.value)}}/>
+                        <input className='signup_input' type="email" placeholder="Email" value={signInEmail} onChange={(e)=>{setSignInEmail(e.target.value)}} />
+                        <input className='signup_input' type="password" placeholder="Password" value={signInPassword} onChange={(e)=>{setSignInPassword(e.target.value)}}/>
                         <a href="#">Forgot your password?</a>
-                        <button>Sign In</button>
+                        <button className='signup_btn'>Sign In</button>
                     </form>
                 </div>
                 <div className="overlay-container">
@@ -80,7 +80,7 @@ const SignUp = () => {
                         <div className="overlay-panel overlay-right">
                             <h1>Hello, Friend!</h1>
                             <p className='signup_text'>Enter your personal details and start journey with us</p>
-                            <button className="ghost" id="signUp">Sign Up</button>
+                            <button className="singup_btn ghost" id="signUp">Sign Up</button>
                         </div>
                     </div>
                 </div>

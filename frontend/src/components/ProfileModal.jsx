@@ -4,8 +4,11 @@ import "../styles/profileModal.css"
 
 const ProfileModal = () => {
   return (
-    <div className='modal_box'>
-      
+    <div>
+      <div className='modal_box'>
+        {/* {alert("hello")} */}
+
+      </div>
     </div>
   )
 }
