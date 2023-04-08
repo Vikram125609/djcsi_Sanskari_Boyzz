@@ -1,10 +1,11 @@
+import Enroll from "./components/Enroll";
+import ImageUpload from "./components/ImageUpload";
+import "./App.css"
+
 function App() {
   return (
     <div className="App">
-      heello
-      <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+      <p className="text-3xl text font-sans">hello world!</p>
     </div>
   );
 }
