@@ -17,10 +17,12 @@ import Navbar from "./components/Navbar";
 import Report from "./components/Report";
 import AllEmp from "./components/AllEmp";
 import Home from "./components/Home";
+import ProfileModal from "./components/ProfileModal";
 
 function App() {
 
   const requestPermission = async () => {
+    console.log("====<")
     const permission = await Notification.requestPermission();
     if (permission === 'granted') {
       const token = await getToken(messaging, {
@@ -45,6 +47,7 @@ function App() {
           <Route exact path='/report' element={< Report />}></Route>
           <Route exact path='/enroll' element={< Enroll />}></Route>
           <Route exact path='/home' element={< Home />}></Route>
+          <Route exact path='/explore/profile' element={< ProfileModal />}></Route>
           <Route exact path='/explore/all-employees' element={< AllEmp />}></Route>
         </Routes>
     </div>
