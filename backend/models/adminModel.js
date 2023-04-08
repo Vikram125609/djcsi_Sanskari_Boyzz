@@ -3,16 +3,19 @@ const mongoose = require('mongoose');
 const adminSchema = new mongoose.Schema({
     first_name: {
         type: String,
-        required: ['true', 'Please enter the first name ']
     },
     last_name: {
         type: String,
-        required: ['true', 'Please enter the last name']
     },
     email: {
         type: String,
-        default: ""
     },
+    unverified_user: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Employee'
+        }
+    ]
 
 }, { timestamps: true })
 

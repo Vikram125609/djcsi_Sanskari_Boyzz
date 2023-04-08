@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const employeeSchema = new mongoose.Schema({
+    aadhar_no: {
+        type: String,
+    },
     first_name: {
         type: String,
         required: ['true', 'Please enter the first name ']
@@ -17,24 +20,35 @@ const employeeSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
+    aadhar: {
+        type: String,
+        default: ""
+    },
+    pancard: {
+        type: String,
+        default: ""
+    },
+    flag: {
+        type: String,
+        enum: ['0', '1', '2', '3'],
+        default: '0'
+    },
     past_employers: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Hr'
         }
     ],
-    // Yaha par feedback ka model aayega 
     feedback: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Hr'
+            ref: 'Feedback'
         }
     ],
-    // Yaha par rating ka model aayega
     rating: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Hr'
+            ref: 'Rating'
         }
     ],
     image: {
