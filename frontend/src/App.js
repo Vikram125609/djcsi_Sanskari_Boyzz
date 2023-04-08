@@ -13,6 +13,8 @@ import Enroll from "./components/Enroll";
 import ImageUpload from "./components/ImageUpload";
 import "./App.css"
 import Explore from "./components/Explore";
+import Navbar from "./components/Navbar";
+import AllEmp from "./components/AllEmp";
 
 function App() {
 
@@ -35,9 +37,11 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <Navbar/>
         <Routes>
           <Route exact path='/signup' element={< SignUp />}></Route>
           <Route exact path='/explore' element={< Explore />}></Route>
+          <Route exact path='/explore/all-employees' element={< AllEmp />}></Route>
         </Routes>
     </div>
     </Router>
