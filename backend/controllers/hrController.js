@@ -1,5 +1,5 @@
 const Hr = require('../models/hrModel');
-const Flag = require('./../models/flagModel');
+const Feedback = require('../models/feedbackModel');
 const Employee = require('../models/employeeModel');
 const path = require('path')
 const { sendSuccess, sendError } = require('../utils/apiResponse');
@@ -30,12 +30,7 @@ const signup = async (req, res, next) => {
 };
 
 const flag = async (req, res, next) => {
-    const { employee_id } = req.params;
-    const { flag, hr_id } = req.body;
-
-    console.log(employee_id);
-    console.log(flag);
-    console.log(hr_id);
+    const { employee_id, flag, hr_id, review, rating } = req.body;
 
     let employee = await Employee.findByIdAndUpdate(
         { _id: employee_id },
@@ -44,18 +39,20 @@ const flag = async (req, res, next) => {
     );
 
     // Send Notification From Here
-    
-    const markFlag = new Flag({
+
+    const feedback = new Feedback({
         hr_id: hr_id,
         employee_id: employee_id,
-        flag: flag
+        flag: flag,
+        review: review,
+        rating: rating,
     })
 
-    await markFlag.save();
+    await feedback.save();
 
     const finalRespnse = {
         employee: employee,
-        markFlag: markFlag
+        feedback: feedback
     }
 
     return sendSuccess(res, 200, `Employee Marked With The ${flag}`, finalRespnse);

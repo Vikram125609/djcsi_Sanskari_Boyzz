@@ -1,4 +1,5 @@
 const Employee = require('../models/employeeModel');
+const Feedback = require('../models/feedbackModel')
 const Admin = require('../models/adminModel');
 const multipart = require('connect-multiparty');
 const multipartMiddleware = multipart();
@@ -108,4 +109,30 @@ const verify = async (req, res, next) => {
     }
 
 };
-module.exports = { verify };
+
+const allEmployee = async (req, res) => {
+    const data = await Employee.find();
+    const finalRespnse = {
+        employee: data
+    }
+    return sendSuccess(res, 200, 'All Employee', finalRespnse);
+};
+
+const employee = async (req, res) => {
+    const { employee_id } = req.params;
+    const employee_data = await Employee.findById({
+        _id: employee_id
+    });
+
+    const feedback = await Feedback.find({
+        "employee_id": employee_id
+    }).populate('hr_id', 'first_name last_name email image');
+
+
+    const finalRespnse = {
+        employee_data: employee_data,
+        feedback: feedback
+    }
+    return sendSuccess(res, 200, 'Employee Data', finalRespnse)
+}
+module.exports = { verify, allEmployee, employee };

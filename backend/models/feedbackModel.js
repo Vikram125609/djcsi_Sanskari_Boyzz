@@ -8,9 +8,17 @@ const feedbackSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Employee'
     },
-    feedback: {
+    review: {
         type: String,
         default: ""
+    },
+    rating: {
+        type: Number,
+        default: 0
+    },
+    flag: {
+        type: String,
+        default: "0"
     }
 })
 
