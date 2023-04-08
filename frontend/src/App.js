@@ -1,6 +1,15 @@
 import { useEffect } from "react";
 import { messaging } from "./firebase";
 import { getToken } from "firebase/messaging";
+import "./App.css"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from 'react-router-dom';
+import SignUp from "./components/SignUp"
+
 function App() {
 
   const requestPermission = async () => {
@@ -9,6 +18,8 @@ function App() {
       const token = await getToken(messaging, {
         vapidKey: "BOcK_mXF0Alh6rclU6KZFHkqTnUWGn_YrPMAyLIfC2KULgqJedUxD-_ZiYFNUd4LsB5P9poiJ2AOpEyMqLTJE50"
       })
+
+      console.log(token)
       localStorage.setItem('FCM', token)
     }
   }
@@ -18,12 +29,13 @@ function App() {
     requestPermission();
   }, []);
   return (
-    <div className="App">
-      heello
-      <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route exact path='/signup' element={< SignUp />}></Route>
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
