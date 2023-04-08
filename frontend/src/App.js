@@ -2,6 +2,21 @@ import { useEffect } from "react";
 import React from 'react';
 import { messaging } from "./firebase";
 import { getToken } from "firebase/messaging";
+import "./App.css"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from 'react-router-dom';
+import SignUp from "./components/SignUp"
+import Enroll from "./components/Enroll";
+import ImageUpload from "./components/ImageUpload";
+import "./App.css"
+import Explore from "./components/Explore";
+import Navbar from "./components/Navbar";
+import AllEmp from "./components/AllEmp";
+
 function App() {
 
   const requestPermission = async () => {
@@ -20,12 +35,16 @@ function App() {
     requestPermission();
   }, []);
   return (
-    <div className="App">
-      heello
-      <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+    <Router>
+      <div className="App">
+        <Navbar/>
+        <Routes>
+          <Route exact path='/signup' element={< SignUp />}></Route>
+          <Route exact path='/explore' element={< Explore />}></Route>
+          <Route exact path='/explore/all-employees' element={< AllEmp />}></Route>
+        </Routes>
     </div>
+    </Router>
   );
 }
 
