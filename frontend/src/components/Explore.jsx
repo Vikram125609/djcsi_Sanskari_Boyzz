@@ -30,7 +30,7 @@ const Explore = () => {
                         <p className="card-text" style={{ fontSize: "16px", fontWeight: "500", fontFamily: "Cambria", margin: "5px 0" }}>Working At</p>
                         <p className="card-text" style={{ margin: "5px 0" }}>Branch Name</p>
                         <p className="card-text"><i className="fa fa-flag" aria-hidden="true"></i></p>
-                        <a href="#" className="btn btn-primary" >Know More</a>
+                        <p  className="btn btn-primary" >Know More</p>
                     </div>
                 </div>
 
@@ -45,7 +45,7 @@ const Explore = () => {
                         <p className="card-text" style={{ fontSize: "16px", fontWeight: "500", fontFamily: "Cambria", margin: "5px 0" }}>Working At</p>
                         <p className="card-text" style={{ margin: "5px 0" }}>Branch Name</p>
                         <p className="card-text"><i className="fa fa-flag" aria-hidden="true"></i></p>
-                        <a href="#" className="btn btn-primary" onClick={() => setOpenProfileModal(true)}>Know More </a>
+                        <p className="btn btn-primary" onClick={() => setOpenProfileModal(!openProfileModal)}>Know More </p>
                     </div>
                 </div>
 
@@ -60,7 +60,7 @@ const Explore = () => {
                         <p className="card-text" style={{ fontSize: "16px", fontWeight: "500", fontFamily: "Cambria", margin: "5px 0" }}>Working At</p>
                         <p className="card-text" style={{ margin: "5px 0" }}>Branch Name</p>
                         <p className="card-text"><i className="fa fa-flag" aria-hidden="true"></i></p>
-                        <a href="#" className="btn btn-primary">Know More</a>
+                        <p className="btn btn-primary">Know More</p>
                     </div>
                 </div>
                 <div className='profilecard'>
@@ -74,7 +74,7 @@ const Explore = () => {
                         <p className="card-text" style={{ fontSize: "16px", fontWeight: "500", fontFamily: "Cambria", margin: "5px 0" }}>Working At</p>
                         <p className="card-text" style={{ margin: "5px 0" }}>Branch Name</p>
                         <p className="card-text"><i className="fa fa-flag" aria-hidden="true"></i></p>
-                        <a href="#" className="btn btn-primary">Know More</a>
+                        <p className="btn btn-primary">Know More</p>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,11 @@
+.modal_box {
+    z-index: 1000;
+    background: #f8f8fb;
+    width: 60vw;
+    height: 60vh;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
