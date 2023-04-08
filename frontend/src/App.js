@@ -12,6 +12,7 @@ import SignUp from "./components/SignUp"
 import Enroll from "./components/Enroll";
 import ImageUpload from "./components/ImageUpload";
 import "./App.css"
+import Explore from "./components/Explore";
 
 function App() {
 
@@ -36,9 +37,8 @@ function App() {
       <div className="App">
         <Routes>
           <Route exact path='/signup' element={< SignUp />}></Route>
+          <Route exact path='/explore' element={< Explore />}></Route>
         </Routes>
-
-      <p className="text-3xl text font-sans">hello world!</p>
     </div>
     </Router>
   );
