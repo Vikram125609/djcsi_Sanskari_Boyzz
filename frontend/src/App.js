@@ -9,6 +9,9 @@ import {
   Link
 } from 'react-router-dom';
 import SignUp from "./components/SignUp"
+import Enroll from "./components/Enroll";
+import ImageUpload from "./components/ImageUpload";
+import "./App.css"
 
 function App() {
 
@@ -34,7 +37,9 @@ function App() {
         <Routes>
           <Route exact path='/signup' element={< SignUp />}></Route>
         </Routes>
-      </div>
+
+      <p className="text-3xl text font-sans">hello world!</p>
+    </div>
     </Router>
   );
 }
