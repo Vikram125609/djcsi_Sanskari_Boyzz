@@ -14,7 +14,9 @@ import Enroll from "./components/Enroll";
 import "./App.css"
 import Explore from "./components/Explore";
 import Navbar from "./components/Navbar";
+import Report from "./components/Report";
 import AllEmp from "./components/AllEmp";
+import Home from "./components/Home";
 
 function App() {
 
@@ -40,6 +42,9 @@ function App() {
         <Routes>
           <Route exact path='/signup' element={< SignUp />}></Route>
           <Route exact path='/explore' element={< Explore />}></Route>
+          <Route exact path='/report' element={< Report />}></Route>
+          <Route exact path='/enroll' element={< Enroll />}></Route>
+          <Route exact path='/home' element={< Home />}></Route>
           <Route exact path='/explore/all-employees' element={< AllEmp />}></Route>
         </Routes>
     </div>

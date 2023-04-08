@@ -4,7 +4,7 @@ import "../styles/upload.css";
 
 function Enroll() {
   return (
-    <div className="enroll_container bg-[#f8f8fb]  my-20  rounded-lg p-12 drop-shadow-lg h-fit w-[40%] mx-auto">
+    <div className="enroll_container bg-[#f8f8fb]  pt-44  rounded-lg p-12 drop-shadow-lg h-fit w-[40%] mx-auto">
       <p className="text-center text-4xl mb-12 font-[cambria] font-semibold	">
         Enroll Employees
       </p>
@@ -30,7 +30,7 @@ function Enroll() {
           >
             Select Your Gender :
           </label>
-          <div class="container h-[65%] flex align-middle justify-center content-center">
+          <div class="container h-[65%] flex align-middle justify-center content-center m-0">
             <div class="select-wrapper w-full">
               <select class="select  peer h-10 w-full rounded-md bg-gray-50 px-8  font-thin outline-none drop-shadow-sm transition-all duration-200 ease-in-out focus:bg-white focus:shadow-lg focus:shadow-blue-[400] border-2">
                 <option value="value1">Gender</option>

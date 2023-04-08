@@ -1,0 +1,10 @@
+input[type=radio] {
+    border: 0px;
+    width: 5%;
+    height: 20px;
+}
+
+
+input::placeholder{
+    padding-left: 15px;
+}
