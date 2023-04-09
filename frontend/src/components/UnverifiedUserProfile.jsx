@@ -1,33 +1,58 @@
 import React from 'react'
 import "../styles/profileModal.css"
-import ProfileImageModal from './ProfileImageModal'
 import { useState } from 'react'
-
+import ProfileImageModal from './ProfileImageModal';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import axios from "axios"
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
+import { useEffect } from 'react';
 
 const UnverifiedUserProfile = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [value, setValue] = React.useState(2);
+  const [empID, setEmpId] = useState(location.state.data._id);
+  console.log(empID);
+  const [empData, setEmpData] = useState();
 
-  const [showModal,setShowModal]=useState(false);
+  const getEmpData = async () => {
+    const data = await axios.get(`http://192.168.110.96:3000/api/employee/v1/employee/${empID}`);
+
+    console.log(data.data.data.employee_data);
+    setEmpData(data.data.data.employee_data)
+  }
+
+  useEffect(() => {
+    getEmpData();
+  }, [])
+
+
+  const [showModal, setShowModal] = useState(false);
   return (
     <>
 
       <div style={{ display: "flex", flexDirection: "column", margin: "0 auto", padding: "5rem 0" }}>
 
-        <div className="wrapper" style={{ margin: "0 auto", marginBottom: "15px" }}>
+        <div className="wrapper" style={{ margin: "0 auto", marginBottom: "15px", position: "relative" }}>
           <div className="left">
-            <img src="https://i.imgur.com/cMy8V5j.png" alt="user" width="100" />
-            <h4 style={{ margin: "10px 0" }}>Alex William</h4>
+            <img src={empData?.image} alt="user" width="100" />
+            <h4 style={{ margin: "10px 0" }}>{empData?.first_name + " " + empData?.last_name}</h4>
           </div>
           <div className="right">
+            <button onClick={() => navigate("/report", { state: { emp_id: empData._id } })} style={{ backgroundColor: "#cba211", padding: "10px", display: "inline", float: "right", borderRadius: "20px", color: "white", position: "absolute", right: "10px", top: "5px" }}>Report</button>
             <div className="info">
               <h3 style={{ margin: "0" }}>Information</h3>
+
               <div className="info_data">
                 <div className="data">
                   <h4>Email</h4>
-                  <p>alex@gmail.com</p>
+                  <p>{empData?.email}</p>
                 </div>
                 <div className="data">
                   <h4>Phone</h4>
-                  <p>0001-213-998761</p>
+                  <p>{empData?.contact}</p>
                 </div>
               </div>
             </div>
@@ -38,7 +63,18 @@ const UnverifiedUserProfile = () => {
               <div className="projects_data">
                 <div className="data">
                   <h4>Average Rating</h4>
-                  <p>ratingstars</p>
+                  <Box
+                    sx={{
+                      '& > legend': { mt: 2 },
+                    }}
+                  >
+                    <Rating
+                      name="read-only"
+                      value={value}
+                      readOnly
+                    />
+
+                  </Box>
                 </div>
                 {/* <div className="data">
                 <h4>Most Viewed</h4>
@@ -49,16 +85,25 @@ const UnverifiedUserProfile = () => {
 
 
 
-            <button onClick={()=>setShowModal(true)} type="button"  className='text-white p-4 rounded-lg bg-[#cba211]'>Available Documents</button>
-              
-              <div className="decision mt-4 flex gap-4">
-                <button className='text-white p-4 rounded-lg bg-[#69c848] w-32'> Accept </button>
-                <button className='text-white p-4 rounded-lg bg-[#d64532] w-32'> Reject </button>
-              </div>
+            <button onClick={() => setShowModal(true)} type="button" style={{ backgroundColor: "#cba211", padding: "15px", borderRadius: "20px", color: "white" }}>Available Documents</button>
+
 
             {/* <profileImageModal/> */}
+
+
+            <div className="decision mt-4 flex gap-4">
+              <button className='text-white p-4 rounded-lg bg-[#69c848] w-32'> Accept </button>
+              <button className='text-white p-4 rounded-lg bg-[#d64532] w-32'> Reject </button>
+            </div>
           </div>
         </div>
+
+
+
+
+
+
+
 
 
         <h2 className="text-2xl font-semibold leading-tight w-[60%] text-left mx-auto" style={{ fontSize: "30px", fontFamily: "Cambria", fontWeight: "600", margin: "10px auto" }} >Flags</h2>
@@ -206,18 +251,19 @@ const UnverifiedUserProfile = () => {
 
 
 
+        {showModal &&
+          <ProfileImageModal
+            setShowModal={setShowModal}
+            images={{ aadhar: empData.aadhar, pan: empData.pancard, image: empData.image }}
+          />
 
+        }
 
 
       </div>
 
-      
-      {showModal &&
-          <ProfileImageModal
-          setShowModal={setShowModal}
-          />
-          
-        }
+
+
 
 
     </>

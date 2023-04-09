@@ -1,9 +1,8 @@
 import React from "react";
 import "../styles/profileModal.css";
-import ProfileImageModal from "./ProfileImageModal";
 import { useState } from "react";
 
-const UnverifiedProfileModel = () => {
+const UnverifiedProfileModal = () => {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
@@ -213,9 +212,9 @@ const UnverifiedProfileModel = () => {
         </table>
       </div>
 
-      {showModal && <ProfileImageModal setShowModal={setShowModal} />}
+      {showModal && <UnverifiedProfileModal setShowModal={setShowModal} />}
     </>
   );
 };
 
-export default ProfileModal;
+export default UnverifiedProfileModal;

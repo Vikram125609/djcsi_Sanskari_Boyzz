@@ -4,11 +4,11 @@ import { useEffect,useState } from 'react';
 
 const ProfileImageModal = (props) => {
 
-    const [imgsrc,setImgSrc]=useState('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80');
+    const [imgsrc,setImgSrc]=useState(props.images.aadhar);
 
 
     return (
-        <div id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
+        <div id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full " >
             {/* <div class="relative w-full h-full max-w-2xl md:h-auto" style={{position:"absolute",
         left: "0",
         right: "0",
@@ -23,7 +23,8 @@ const ProfileImageModal = (props) => {
                 bottom: "0",
                 margin: "auto",
                 width:"70%",
-                height:"70%",
+                minHeight:"70%",
+                maxHeight:"fit-content",
                 background:"#dedede",
                 borderRadius:"20px",
                 boxShadow:"0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22)"
@@ -40,13 +41,13 @@ const ProfileImageModal = (props) => {
                     </h3>
 
                     <div style={{display:"flex"}}>
-                    <button style={{ backgroundColor: "#cba211",width:"80px", padding: "10px", borderRadius: "20px", color: "white" ,marginRight:"10px"}}>
+                    <button onClick={()=>setImgSrc(props.images.aadhar)}  style={{ backgroundColor: "#cba211",width:"80px", padding: "10px", borderRadius: "20px", color: "white" ,marginRight:"10px"}}>
                        Aadhar
                        </button>
-                    <button style={{ backgroundColor: "#cba211",width:"80px", padding: "10px", borderRadius: "20px", color: "white",marginRight:"10px" }} >
+                    <button onClick={()=>setImgSrc(props.images.pan)} style={{ backgroundColor: "#cba211",width:"80px", padding: "10px", borderRadius: "20px", color: "white",marginRight:"10px" }} >
                        Pan
                     </button>
-                    < button style={{ backgroundColor: "#cba211",width:"80px", padding: "10px", borderRadius: "20px", color: "white",marginRight:"10px" }}>
+                    < button onClick={()=>setImgSrc(props.images.image)} style={{ backgroundColor: "#cba211",width:"80px", padding: "10px", borderRadius: "20px", color: "white",marginRight:"10px" }}>
                        Photo
                     </button>
                     </div>
@@ -55,9 +56,9 @@ const ProfileImageModal = (props) => {
 
                     
                 </div>
-                <div style={{padding:"15px"}} >
-                        <img  style={{margin:"0 auto"}}src={imgsrc} alt="" />
-                    </div>
+                <div style={{padding:"15px",maxWidth:"100%",maxHeight:"100%"}} >
+                        <img  style={{maxWidth:"60%", margin:"0 auto",}}src={imgsrc} alt="" />
+                </div>
 
 
             </div>
