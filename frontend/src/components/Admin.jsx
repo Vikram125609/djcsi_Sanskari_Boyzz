@@ -14,7 +14,7 @@ const Admin = () => {
 
 
   const getUnvEmp = async () => {
-    let data = await axios.get("http://192.168.110.96:3000/api/admin/v1/unverifiedUser");
+    let data = await axios.get("http://localhost:3000/api/admin/v1/unverifiedUser");
     console.log(data.data.data.data);
     setUnvEmp(data.data.data.data)
   }

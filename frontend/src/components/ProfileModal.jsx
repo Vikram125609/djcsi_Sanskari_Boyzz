@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const ProfileModal = () => {
   const navigate = useNavigate();
   const [value, setValue] = React.useState(2);
+  const [feedback,setFeedBackData]=useState();
 
 
   const location = useLocation();
@@ -21,8 +22,9 @@ const ProfileModal = () => {
   const getEmpData = async () => {
     const data = await axios.get(`http://localhost:3000/api/employee/v1/employee/${empID}`);
 
-    console.log(data.data.data.employee_data);
-    setEmpData(data.data.data.employee_data)
+    console.log(data?.data?.data);
+    setEmpData(data?.data?.data?.employee_data)
+    setFeedBackData(data?.data?.data?.feedback);
   }
 
   useEffect(() => {

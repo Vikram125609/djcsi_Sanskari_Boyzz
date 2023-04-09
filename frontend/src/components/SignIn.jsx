@@ -16,13 +16,13 @@ const SignIn = () => {
             console.log(email);
             console.log(password);
 
-            const data = await axios.post('http://localhost:3000/api/hr/v1/signin',{
-                "email":email
+            const data = await axios.post('http://localhost:3000/api/hr/v1/signin', {
+                "email": email
             });
 
-            console.log(data.data.hr[0]);
+            console.log(data.data.data[0]);
 
-            sessionStorage.setItem("HR-DATA", JSON.stringify(data.data.hr[0]));
+            sessionStorage.setItem("HR-DATA", JSON.stringify(data.data.data[0]));
             navigate("/home");
         }
 
@@ -155,4 +155,4 @@ const SignIn = () => {
     )
 }
 
-export default SignIn
+export default SignIn;
