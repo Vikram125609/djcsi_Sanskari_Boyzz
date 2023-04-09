@@ -44,7 +44,7 @@ function Enroll() {
 
     setLoading(true);
     try {
-      const data = await axios.post('http://192.168.110.96:3000/api/employee/v1/verify', formdata);
+      const data = await axios.post('http://localhost:3000/api/employee/v1/verify', formdata);
       console.log(data);
 
       if (data.data.code === 200) {

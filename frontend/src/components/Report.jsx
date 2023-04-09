@@ -29,7 +29,7 @@ function Report() {
 
     e.preventDefault();
     alert("hii");
-    let data = await axios.post("http://192.168.110.96:3000/api/hr/v1/feedback",{employee_id:empid,flag:flag,hr_id:hrId,rating:rating,review:review});
+    let data = await axios.post("http://localhost:3000/api/hr/v1/feedback",{employee_id:empid,flag:flag,hr_id:hrId,rating:rating,review:review});
 
     console.log(data);
 

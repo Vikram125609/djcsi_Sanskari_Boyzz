@@ -73,8 +73,7 @@ const Explore = () => {
                                         <h5 className="card-title" style={{ fontSize: "18px" }}>{emp.first_name + " "+emp.last_name}</h5>
                                         <p className="card-text" style={{ fontSize: "16px", fontWeight: "500", fontFamily: "Cambria", margin: "5px 0" }}>Working At</p>
                                         <p className="card-text" style={{ margin: "5px 0" }}>{emp?.workinAt}</p>
-                                        <p className="card-text"><i className="fa fa-flag" aria-hidden="true"></i></p>
-                                        <button className="btn btn-primary" onClick={() => navigate("/explore/profile",{ state: { data:emp} })} >Know More</button>
+                                        <button className="btn btn-primary mt-5" onClick={() => navigate("/explore/profile",{ state: { data:emp} })} >Know More</button>
                                     </div>
                                 </div>
                             }
@@ -100,8 +99,7 @@ const Explore = () => {
                                         <h5 className="card-title" style={{ fontSize: "18px" }}>{emp.employee_id.first_name +" " +emp.employee_id.last_name}</h5>
                                         <p className="card-text" style={{ fontSize: "16px", fontWeight: "500", fontFamily: "Cambria", margin: "5px 0" }}>Working At</p>
                                         <p className="card-text" style={{ margin: "5px 0" }}>Branch Name</p>
-                                        <p className="card-text"><i className="fa fa-flag" aria-hidden="true"></i></p>
-                                        <button href="#" className="btn btn-primary" onClick={() => navigate("/explore/profile",{ state: { data:emp} })}>Know More</button>
+                                        <button href="#" className="btn btn-primary mt-5" onClick={() => navigate("/explore/profile",{ state: { data:emp} })}>Know More</button>
                                     </div>
                                 </div>
                         })}

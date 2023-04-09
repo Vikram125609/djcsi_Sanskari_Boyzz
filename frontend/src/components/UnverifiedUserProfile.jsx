@@ -8,6 +8,7 @@ import axios from "axios"
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import { useEffect } from 'react';
+import Swal from 'sweetalert2'
 
 const UnverifiedUserProfile = () => {
   const location = useLocation();
@@ -18,12 +19,28 @@ const UnverifiedUserProfile = () => {
   const [empData, setEmpData] = useState();
 
   const getEmpData = async () => {
-    const data = await axios.get(`http://192.168.110.96:3000/api/employee/v1/employee/${empID}`);
+    const data = await axios.get(`http://localhost:3000/api/employee/v1/employee/${empID}`);
 
     console.log(data.data.data.employee_data);
     setEmpData(data.data.data.employee_data)
   }
 
+  const verifyUser = async (e) => {
+    console.log(empID)
+    e.preventDefault();
+    // alert("hii");
+    const data = await axios.get(`http://localhost:3000/api/admin/v1/verify/${empID}`);
+    if (data) {
+      Swal.fire({
+        title: 'User Verified Successfully! ',
+        text: '',
+        icon: 'success',
+        confirmButtonText: 'Cool'
+      }).then(() => {
+        navigate("/admin")
+      })
+    }
+  }
   useEffect(() => {
     getEmpData();
   }, [])
@@ -92,7 +109,7 @@ const UnverifiedUserProfile = () => {
 
 
             <div className="decision mt-4 flex gap-4">
-              <button className='text-white p-4 rounded-lg bg-[#69c848] w-32'> Accept </button>
+              <button className='text-white p-4 rounded-lg bg-[#69c848] w-32' onClick={verifyUser}> Accept </button>
               <button className='text-white p-4 rounded-lg bg-[#d64532] w-32'> Reject </button>
             </div>
           </div>

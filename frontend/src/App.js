@@ -24,6 +24,8 @@ import AllUnverified from "./components/AllUnverified";
 import SignIn from "./components/SignIn";
 import Landing from "../src/components/Landing/Landing"
 import LandingNav from "./components/LandinNav";
+import Footer from "../src/components/Footer"
+import AdminNav from "../src/components/AdminNav"
 
 function App() {
 
@@ -60,10 +62,12 @@ function App() {
           <Route exact path='/home' element={<>  <Navbar />< Home /></>}></Route>
           <Route exact path='/explore/profile' element={ <> <Navbar />< ProfileModal /></>}></Route>
           <Route exact path='/explore/all-employees' element={ <> <Navbar />< AllEmp /></>}></Route>
-          <Route exact path='/admin' element={ <> <Navbar />< Admin /></>}></Route>
-          <Route exact path='/admin/profile' element={ <> <Navbar />< UnverifiedUserProfile /></>}></Route>
-          <Route exact path='/admin/all-unverified' element={ <> <Navbar />< AllUnverified /></>}></Route>
+          <Route exact path='/admin' element={ <> <AdminNav />< Admin /></>}></Route>
+          <Route exact path='/admin/profile' element={ <> <AdminNav />< UnverifiedUserProfile /></>}></Route>
+          <Route exact path='/admin/all-unverified' element={ <> <AdminNav />< AllUnverified /></>}></Route>
         </Routes>
+
+        <Footer/>
       </div>
     </Router>
   );
