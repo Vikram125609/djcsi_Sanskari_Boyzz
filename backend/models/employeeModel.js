@@ -58,6 +58,10 @@ const employeeSchema = new mongoose.Schema({
     is_verified: {
         type: Boolean,
         default: false
+    },
+    working_at: {
+        type: String,
+        default: "Mumbai"
     }
 }, { timestamps: true })
 

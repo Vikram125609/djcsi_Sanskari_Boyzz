@@ -1,6 +1,8 @@
 import { useEffect } from "react";
+import { socket } from "./socket";
 import { messaging } from "./firebase";
 import { getToken } from "firebase/messaging";
+import Chat from "./Component/Chat";
 function App() {
 
   const requestPermission = async () => {
@@ -15,11 +17,11 @@ function App() {
   }
 
   useEffect(() => {
-    console.log('Hii');
-    requestPermission();
+    socket.connect();
   }, []);
   return (
     <div className="App">
+      <Chat />
     </div>
   );
 }

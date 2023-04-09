@@ -29,16 +29,8 @@ const signup = async (req, res, next) => {
     return sendSuccess(res, 200, "Signup Successfully", finalResponse);
 };
 
-const flag = async (req, res, next) => {
+const feedback = async (req, res, next) => {
     const { employee_id, flag, hr_id, review, rating } = req.body;
-
-    let employee = await Employee.findByIdAndUpdate(
-        { _id: employee_id },
-        { "flag": flag },
-        { new: true, runValidators: true }
-    );
-
-    // Send Notification From Here
 
     const feedback = new Feedback({
         hr_id: hr_id,
@@ -46,7 +38,20 @@ const flag = async (req, res, next) => {
         flag: flag,
         review: review,
         rating: rating,
-    })
+    });
+
+
+    let employee = await Employee.findByIdAndUpdate(
+        { _id: employee_id },
+        {
+            "flag": flag,
+            $push: { "feedback": feedback._id }
+        },
+        { new: true, runValidators: true }
+    );
+
+    // Send Notification From Here
+
 
     await feedback.save();
 
@@ -57,4 +62,17 @@ const flag = async (req, res, next) => {
 
     return sendSuccess(res, 200, `Employee Marked With The ${flag}`, finalRespnse);
 }
-module.exports = { signup, flag };
+
+
+
+const signin = async (req, res, next) => {
+    const { email } = req.body;
+    const hr = await Hr.find({
+        "email": email
+    });
+    const finalRespnse = {
+        hr: hr[0]
+    }
+    return sendSuccess(res, 200, 'Login Successfully', hr);
+};
+module.exports = { signup, feedback, signin };

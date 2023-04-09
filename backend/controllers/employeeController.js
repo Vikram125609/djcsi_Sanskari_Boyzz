@@ -15,7 +15,11 @@ const verify = async (req, res, next) => {
 
     var matched = true;
 
-    const { first_name, last_name, address, working_status } = req.body;
+    var message;
+
+    console.log('hii');
+
+    const { first_name, last_name, address, working_status, working_at } = req.body;
 
     const imagePath1 = path.join(__dirname, `../uploaded-images/aadhar-${req.files[0].originalname}`);
     const imagePath2 = path.join(__dirname, `../uploaded-images/pancard-${req.files[1].originalname}`);
@@ -28,22 +32,6 @@ const verify = async (req, res, next) => {
     let form_data = new Formdata();
 
     const uniqueId = Math.floor((Math.random() * 1000000) + 1);
-
-    form_data.append('aadhar', url1.url);
-    form_data.append('pancard', url2.url);
-    form_data.append('photo', url3.url);
-    form_data.append('name', first_name);
-
-    try {
-        const response = await axios.post('http://192.168.43.101:5000/upload', form_data);
-        if (String(response?.data) === "__Different") {
-            matched = false;
-        }
-        console.log(response?.data);
-
-    } catch (error) {
-        console.log(error);
-    }
 
     let aadhar_no;
 
@@ -76,42 +64,80 @@ const verify = async (req, res, next) => {
         console.log(error);
     }
 
-    const employee = new Employee({
-        aadhar_no: aadhar_no,
-        first_name: first_name,
-        last_name: last_name,
-        address: address,
-        working_status: working_status,
-        aadhar: url1.url,
-        pancard: url2.url,
-        image: url3.url
-    });
+    form_data.append('aadhar', url1.url);
+    form_data.append('pancard', url2.url);
+    form_data.append('photo', url3.url);
+    form_data.append('id', aadhar_no);
 
-    console.log(matched);
+    try {
+        const response = await axios.post('http://192.168.110.54:5000/upload', form_data);
+        if (String(response?.data) === "__Different" || String(response?.data) === "__NoPerson") {
+            message = String(response?.data);
+            matched = false;
+        }
+        if (String(response?.data) === "__FSuccessful") {
+            message = String(response?.data);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+
 
     if (matched) {
-        console.log('yaha par true');
+        const employee = new Employee({
+            aadhar_no: aadhar_no,
+            first_name: first_name,
+            last_name: last_name,
+            address: address,
+            working_status: working_status,
+            aadhar: url1.url,
+            pancard: url2.url,
+            image: url3.url,
+            is_verified: true
+        });
         await employee.save();
         const finalResponse = {
             employee: employee
         }
-        return sendSuccess(res, 200, "Signup Successfully", finalResponse);
+        if (message === "__FSuccessful")
+            return sendSuccess(res, 200, "Verified Successfull & Added To The Database", finalResponse);
+        else
+            return sendSuccess(res, 200, "Verified Successfully & User Already Exist", finalResponse)
     }
     else {
-        console.log('yaha par false');
+        const employee = new Employee({
+            aadhar_no: aadhar_no,
+            first_name: first_name,
+            last_name: last_name,
+            address: address,
+            working_status: working_status,
+            aadhar: url1.url,
+            pancard: url2.url,
+            image: url3.url,
+            is_verified: false
+        });
         await employee.save();
         const admin = await Admin.findByIdAndUpdate(
             { _id: "6431672a5d04f400022772b4" },
             { $push: { "unverified_user": employee._id } },
             { new: true, runValidators: true }
         );
-        return sendError(res, 400, 'Images are not matched');
+        const finalRespnse = {
+            employee: employee,
+            admin: admin
+        }
+        if (message === "__Different")
+            return sendSuccess(res, 201, 'People in images are not same', finalRespnse);
+        else
+            return sendSuccess(res, 201, 'No Person Found', finalRespnse);
     }
 
 };
 
 const allEmployee = async (req, res) => {
-    const data = await Employee.find();
+    const data = await Employee.find({
+        "is_verified": true
+    });
     const finalRespnse = {
         employee: data
     }
@@ -135,4 +161,21 @@ const employee = async (req, res) => {
     }
     return sendSuccess(res, 200, 'Employee Data', finalRespnse)
 }
-module.exports = { verify, allEmployee, employee };
+
+const recommendedEmployee = async (req, res, next) => {
+    // const recommendedEmployee = await Feedback.find(
+    //     { $and: [{ "rating": { $gt: 2 } }, { "is_verified": true }] }
+    // ).populate('employee_id', 'first_name last_name image aadhar pancard address');
+
+    const recommendedEmployee = await Feedback.find({
+        "rating": { $gt: 2 },
+
+    }).populate('employee_id', 'first_name last_name image aadhar pancard address');
+
+    const finalRespnse = {
+        recommendedEmployee: recommendedEmployee
+    }
+
+    return sendSuccess(res, 200, 'Recommended Employee', finalRespnse);
+}
+module.exports = { verify, allEmployee, employee, recommendedEmployee };
