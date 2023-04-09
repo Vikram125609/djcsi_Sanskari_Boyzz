@@ -30,7 +30,7 @@ const Explore = () => {
                         <p className="card-text" style={{ fontSize: "16px", fontWeight: "500", fontFamily: "Cambria", margin: "5px 0" }}>Working At</p>
                         <p className="card-text" style={{ margin: "5px 0" }}>Branch Name</p>
                         <p className="card-text"><i className="fa fa-flag" aria-hidden="true"></i></p>
-                        <p  className="btn btn-primary" onClick={() => navigate("/explore/profile")} >Know More</p>
+                        <p  className="btn btn-primary" onClick={() => navigate("/admin/profile")} >Know More</p>
                     </div>
                 </div>
 

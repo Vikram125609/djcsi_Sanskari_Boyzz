@@ -18,6 +18,9 @@ import Report from "./components/Report";
 import AllEmp from "./components/AllEmp";
 import Home from "./components/Home";
 import ProfileModal from "./components/ProfileModal";
+import Admin from "./components/Admin";
+import UnverifiedUserProfile from "./components/UnverifiedUserProfile";
+import AllUnverified from "./components/AllUnverified";
 
 function App() {
 
@@ -49,6 +52,12 @@ function App() {
           <Route exact path='/home' element={< Home />}></Route>
           <Route exact path='/explore/profile' element={< ProfileModal />}></Route>
           <Route exact path='/explore/all-employees' element={< AllEmp />}></Route>
+          <Route exact path='/admin' element={< Admin />}></Route>
+          <Route exact path='/admin/profile' element={< UnverifiedUserProfile />}></Route>
+          <Route exact path='/admin/all-unverified' element={< AllUnverified />}></Route>
+
+
+
         </Routes>
     </div>
     </Router>

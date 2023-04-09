@@ -1,10 +1,14 @@
 import React from "react";
 import ImageUpload from "./ImageUpload";
 import "../styles/upload.css";
+import background from "../assets/background.jpg"
+import "../styles/enroll.css"
+
 
 function Enroll() {
   return (
-    <div className="enroll_container bg-[#f8f8fb]  pt-44  rounded-lg p-12 drop-shadow-lg h-fit w-[40%] mx-auto">
+    <div className="bg-sky-200" >
+        <div className="enroll_container  pt-44  rounded-lg p-12 drop-shadow-lg h-fit w-[40%] mx-auto bg-white" >
       <p className="text-center text-4xl mb-12 font-[cambria] font-semibold	">
         Enroll Employees
       </p>
@@ -69,6 +73,8 @@ function Enroll() {
         </button>
       </div>
     </div>
+    </div>
+
   );
 }
 
