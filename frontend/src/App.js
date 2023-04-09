@@ -21,6 +21,9 @@ import ProfileModal from "./components/ProfileModal";
 import Admin from "./components/Admin";
 import UnverifiedUserProfile from "./components/UnverifiedUserProfile";
 import AllUnverified from "./components/AllUnverified";
+import SignIn from "./components/SignIn";
+import Landing from "../src/components/Landing/Landing"
+import LandingNav from "./components/LandinNav";
 
 function App() {
 
@@ -42,24 +45,26 @@ function App() {
   }, []);
   return (
     <Router>
+
       <div className="App">
-        <Navbar/>
         <Routes>
-          <Route exact path='/signup' element={< SignUp />}></Route>
-          <Route exact path='/explore' element={< Explore />}></Route>
-          <Route exact path='/report' element={< Report />}></Route>
-          <Route exact path='/enroll' element={< Enroll />}></Route>
-          <Route exact path='/home' element={< Home />}></Route>
-          <Route exact path='/explore/profile' element={< ProfileModal />}></Route>
-          <Route exact path='/explore/all-employees' element={< AllEmp />}></Route>
-          <Route exact path='/admin' element={< Admin />}></Route>
-          <Route exact path='/admin/profile' element={< UnverifiedUserProfile />}></Route>
-          <Route exact path='/admin/all-unverified' element={< AllUnverified />}></Route>
-
-
-
+          <Route exact path='/' element={<><LandingNav /> <Landing /></>}></Route>
         </Routes>
-    </div>
+      
+        <Routes>
+          <Route exact path='/login' element={ <> <LandingNav />< SignIn /></>}></Route>
+          <Route exact path='/signup' element={ <> <LandingNav />< SignUp /></>}></Route>
+          <Route exact path='/explore' element={ <> <Navbar />< Explore /></>}></Route>
+          <Route exact path='/report' element={<>  <Navbar />< Report /></>}></Route>
+          <Route exact path='/enroll' element={ <> <Navbar />< Enroll /></>}></Route>
+          <Route exact path='/home' element={<>  <Navbar />< Home /></>}></Route>
+          <Route exact path='/explore/profile' element={ <> <Navbar />< ProfileModal /></>}></Route>
+          <Route exact path='/explore/all-employees' element={ <> <Navbar />< AllEmp /></>}></Route>
+          <Route exact path='/admin' element={ <> <Navbar />< Admin /></>}></Route>
+          <Route exact path='/admin/profile' element={ <> <Navbar />< UnverifiedUserProfile /></>}></Route>
+          <Route exact path='/admin/all-unverified' element={ <> <Navbar />< AllUnverified /></>}></Route>
+        </Routes>
+      </div>
     </Router>
   );
 }

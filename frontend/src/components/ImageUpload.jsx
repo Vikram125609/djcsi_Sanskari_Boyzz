@@ -26,12 +26,25 @@ export default class ImageUpload extends React.Component {
       });
     };
 
+    if(this.props.setImage){
+      this.props?.setImage(e.target.files[0])
+    }
+    
+
+    if(this.props.setEmpAadhar){
+      this?.props?.setEmpAadhar(e.target.files[0]);
+    }
+
+    // this?.props?.setEmpImage(e.target.files[0]);
+    // this?.props?.setEmpAadhar(e.target.files[0]);
+   
+
     reader.readAsDataURL(file);
   }
 
   render() {
     let { imagePreviewUrl } = this.state;
-    let $imagePreview = null;
+     let $imagePreview = null;
     if (imagePreviewUrl) {
       $imagePreview = <img className=" w-[94%]" src={imagePreviewUrl} />;
     } else {

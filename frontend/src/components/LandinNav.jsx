@@ -4,9 +4,8 @@ import "../styles/navbar.css"
 import logo from "../assets/logo.png"
 import { useNavigate } from 'react-router-dom'
 
-const Navbar = () => {
+const LandingNav = () => {
     const navigate = useNavigate();
-
     const handleLogout = ()=>{
         sessionStorage.removeItem("HR-DATA");
         navigate("/");
@@ -22,17 +21,8 @@ const Navbar = () => {
                     <span className="line line3"></span>
                 </div>
                 <ul className="menu-items">
-                    <Link to="/home">
-                        <li>Home</li>
-                    </Link>
-                    <Link to="/enroll">
-                        <li>Enroll Employee</li>
-                    </Link>
-                    <Link to="/explore">
-                        <li>Explore</li>
-                    </Link>
-                    <Link onClick={handleLogout} to="">
-                    <li>Logout</li>
+                    <Link to="/login">
+                        <li>Login/Signup</li>
                     </Link>
                 </ul>
                 <h1 className="logo">
@@ -43,4 +33,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default LandingNav

@@ -1,74 +1,38 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router';
-import "../styles/signup.css"
-import ImageUpload from './ImageUpload';
-import axios from "axios"
-import Swal from 'sweetalert2'
+import React from 'react'
+import { useNavigate } from 'react-router'
+import { useState } from 'react';
+import axios from 'axios';
 
-const SignUp = () => {
-    const navigate = useNavigate();
+const SignIn = () => {
 
-    const [first_name, setFirstName] = useState('');
-    const [last_name, setLastName] = useState('');
-
-    const [email, setEmail] = useState('');
-
-    const [fcm, setFCM] = useState('');
-
-    const [password, setPassword] = useState('');
-
-    const [workingAt,setWorkingAt]=useState('');
-
-    const [image,setImage]=useState();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
 
-    
-    const handleSignUp = async (e) => {
+    const handleSignIn = async (e) => {
         e.preventDefault();
-        let formdata = new FormData();
-        alert("hii")
-        formdata.append("first_name",first_name);
-        formdata.append("last_name",last_name);
-        formdata.append("email",email)
-        formdata.append("fcm",localStorage.getItem('FCM'))
-        formdata.append("working_at",workingAt)
-        formdata.append('image',image)
-        console.log(image);
-        console.log(formdata)
-        if (first_name && email && last_name &&  password && workingAt) {
-          
+
+        if (email && password) {
             console.log(email);
             console.log(password);
 
+            const data = await axios.post('http://localhost:3000/api/hr/v1/signin',{
+                "email":email
+            });
 
+            console.log(data.data.hr[0]);
 
-            const data = await axios.post('http://localhost:3000/api/hr/v1/signup',formdata);
-
-            console.log(data);
-
-            if(data.data.code===200){
-                Swal.fire({
-                    title: 'Signed Up Successfully! ',
-                    text: '',
-                    icon: 'success',
-                    confirmButtonText: 'Cool'
-                  }).then(()=>{
-                    navigate("/login")
-                  })
-            }
+            sessionStorage.setItem("HR-DATA", JSON.stringify(data.data.hr[0]));
+            navigate("/home");
         }
-
 
     }
 
 
 
-
-
-
+    const navigate = useNavigate();
     return (
-
-        <div style={{ width: "80%", margin: "0 auto", boxShadow: "0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22)", borderRadius: "20px" }}>
+        <div style={{ width: "80%", height: "80%", margin: "0 auto", boxShadow: "0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22)", borderRadius: "20px" }}>
 
             <div
                 class="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between p-6 " style={{
@@ -87,62 +51,21 @@ const SignUp = () => {
                 <div class="md:w-8/12 lg:ml-6 lg:w-5/12">
                     <form >
 
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <div style={{ flex: "0.48" }}>
-                                <h4>First Name</h4>
-                                <div class="relative mb-6" data-te-input-wrapper-init style={{ flex: "0.48" }}>
-                                    <input
-                                        type="text"
-                                        class="peer block min-h-[auto] w-full rounded border-0  px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                        id="exampleFormControlInput3"
-                                        value={first_name}
-                                        placeholder="Email address" style={{ border: "2px solid #c8c8c8" }} 
-                                        onChange={(e)=>setFirstName(e.target.value)}/>
-                                </div>
-                            </div>
-                            <div style={{ flex: "0.48" }}>
-                                <div class="relative mb-6" data-te-input-wrapper-init >
-
-                                    <h4>Last Name</h4>
-                                    <input
-                                        type="text"
-                                        class="peer block min-h-[auto] w-full rounded border-0  px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                        id="exampleFormControlInput3"
-                                        placeholder="Email address" style={{ border: "2px solid #c8c8c8" }} 
-                                        value={last_name}
-                                        onChange={(e)=>setLastName(e.target.value)}/>
-                                </div>
-                            </div>
-                        </div>
                         <div class="relative mb-6" data-te-input-wrapper-init>
                             <h4>Email</h4>
                             <input
                                 type="text"
                                 class="peer block min-h-[auto] w-full rounded border-0  px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none  [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                                 id="exampleFormControlInput3"
-                                placeholder="Email address" style={{ border: "2px solid #c8c8c8",}}
                                 value={email}
-                                onChange={(e)=>setEmail(e.target.value)} />
+                                placeholder="Email address" style={{ border: "2px solid #c8c8c8" }}
+                                onChange={(e) => setEmail(e.target.value)} />
+                            {/* <label
+                        for="exampleFormControlInput3"
+                        class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15]  transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-600 dark:peer-focus:text-neutral-600"
+                    >Email address
+                    </label> */}
                         </div>
-
-                        <div class="relative mb-6" data-te-input-wrapper-init>
-                            <h4>Working At</h4>
-                            <input
-                                type="text"
-                                class="peer block min-h-[auto] w-full rounded border-0  px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                                id="exampleFormControlInput33"
-                                placeholder="Password" style={{ border: "2px solid #c8c8c8" }}
-                                value={workingAt}
-                                onChange={(e)=>setWorkingAt(e.target.value)} />
-                        </div>
-
-                        <div class=" h-fit">
-                            <p className="flex my-[10px] font-bold mt-[10px] mb-[5px]">Upload Profile Image :</p>
-                            <div className=" image_upload flex h-fit " style={{marginBottom:"15px" }}>
-                                <ImageUpload  setImage={setImage}/>
-                            </div>
-                        </div>
-
 
                         <div class="relative mb-6" data-te-input-wrapper-init>
                             <h4>Password</h4>
@@ -150,7 +73,14 @@ const SignUp = () => {
                                 type="password"
                                 class="peer block min-h-[auto] w-full rounded border-0  px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                                 id="exampleFormControlInput33"
-                                placeholder="Password" style={{ border: "2px solid #c8c8c8", marginTop: "0.5rem" }} />
+                                value={password}
+                                placeholder="Password" style={{ border: "2px solid #c8c8c8" }}
+                                onChange={(e) => setPassword(e.target.value)} />
+                            {/* <label
+                        for="exampleFormControlInput33"
+                        class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-600 dark:peer-focus:text-neutral-600"
+                    >Password
+                    </label> */}
                         </div>
 
 
@@ -162,8 +92,11 @@ const SignUp = () => {
                                     value=""
                                     id="exampleCheck3"
                                     checked />
-
-                                <h4>Remember Me</h4>
+                                <label
+                                    class="inline-block pl-[0.15rem] hover:cursor-pointer"
+                                    for="exampleCheck3">
+                                    Remember me
+                                </label>
                             </div>
 
 
@@ -181,10 +114,9 @@ const SignUp = () => {
                             data-te-ripple-init
                             data-te-ripple-color="light"
                             style={{ background: "#3061AF" }}
-                            onClick={handleSignUp}
-                            >
-                                
-                            Sign Up
+                            onClick={handleSignIn}>
+                            Sign in
+
                         </button>
 
 
@@ -207,21 +139,20 @@ const SignUp = () => {
 
                             Continue with Google
                         </a>
-                        <a onClick={() => navigate("/login")}
+                        <a onClick={() => navigate("/signup")}
                             class="mb-3 flex w-full items-center justify-center rounded bg-info px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#54b4d3] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)]"
                             style={{ backgroundColor: "#55acee" }}
                             role="button"
                             data-te-ripple-init
                             data-te-ripple-color="light">
 
-                            Already have account? Sign In
+                            Dont't have account? Sign Up
                         </a>
                     </form>
                 </div>
             </div>
         </div>
     )
-
 }
 
-export default SignUp;
+export default SignIn
