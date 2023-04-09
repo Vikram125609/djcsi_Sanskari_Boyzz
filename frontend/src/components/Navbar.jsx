@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import "../styles/navbar.css"
+import logo from "../assets/logo.png"
 
 const Navbar = () => {
     return (
@@ -34,7 +35,9 @@ const Navbar = () => {
                     <li>Logout</li>
                     </Link>
                 </ul>
-                <h1 className="logo">Navbar</h1>
+                <h1 className="logo">
+                    <a href="/"><img className="w-32 " src={logo}  /></a>
+                </h1>
             </div>
         </nav>
     )
